@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "75704c84-d46c-4164-856a-143fe9c989d4",
+		"name": "Week2-ClassroomActivity Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28725993"
+	},
+	"item": [
+		{
+			"name": "Create Change Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Change Request is created \", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"var resp = pm.response.json();\r",
+							"var csys_id = resp.result.sys_id;\r",
+							"console.log(csys_id);\r",
+							"pm.globals.set(\"csystem_id\", csys_id);\r",
+							"var csysid = pm.globals.get(\"csystem_id\");\r",
+							"console.log(csysid);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"short_description\": \"Bug Fix\",\r\n    \"description\": \"New Version Implementation post Bug fix\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/now/table/{{CR}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"{{CR}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All the Change Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/now/table/{{CR}}?sysparm_fields=short_description,description,number",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"{{CR}}"
+					],
+					"query": [
+						{
+							"key": "sysparm_fields",
+							"value": "short_description,description,number"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify the CR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Information modified\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"short_description\": \"Week2Day1_Test\",\r\n    \"description\": \"Week2Day1_Test\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/now/table/{{CR}}/{{csystem_id}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"{{CR}}",
+						"{{csystem_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete CR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Record has been deleted\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/api/now/table/{{CR}}/{{csystem_id}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"{{CR}}",
+						"{{csystem_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{Pwd}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{UName}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CR",
+			"value": "change_request",
+			"type": "string"
+		}
+	]
+}
