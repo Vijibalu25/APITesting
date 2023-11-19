@@ -1,0 +1,21 @@
+{
+	"id": "07163efa-97e2-431b-873b-108c3c958ac5",
+	"values": [
+		{
+			"key": "system_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		},
+		{
+			"key": "csystem_id",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2023-11-18T12:15:50.129Z",
+	"_postman_exported_using": "Postman/10.20.0"
+}
